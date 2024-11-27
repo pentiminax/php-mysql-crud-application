@@ -1,5 +1,7 @@
-<?php include 'db.php'; ?>
 <?php
+
+include_once 'db.php';
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $title = $_POST['title'];
     $author = $_POST['author'];
