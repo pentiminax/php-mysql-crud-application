@@ -3,9 +3,9 @@
 require_once __DIR__ . '/vendor/autoload.php';
 
 $host = 'mysql';
-$db = getenv('MYSQL_DATABASE');
-$user = getenv('MYSQL_USER');
-$password = getenv('MYSQL_PASSWORD');
+$db = $_ENV['MYSQL_DATABASE'];
+$user = $_ENV['MYSQL_USER'];
+$password = $_ENV['MYSQL_PASSWORD'];
 
 try {
     $pdo = new PDO("mysql:host=$host;dbname=$db;charset=utf8mb4", $user, $password);
