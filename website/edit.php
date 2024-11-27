@@ -5,7 +5,7 @@ $id = $_GET['id'] ?? null;
 
 if (!$id) {
     header("Location: index.php");
-    
+
     exit();
 }
 
@@ -16,15 +16,14 @@ $stmt->execute([$id]);
 $book = $stmt->fetch(PDO::FETCH_ASSOC);
 
 if (!$book) {
-    die("Livre introuvable !");
+    header("Location: index.php");
 }
 
-// Mettre à jour le livre
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     ['title' => $title, 'author' => $author, 'year' => $year, 'genre' => $genre] = $data;
 
     $stmt = $pdo->prepare("UPDATE books SET title = ?, author = ?, published_year = ?, genre = ? WHERE id = ?");
-    
+
     $stmt->execute([$title, $author, $year, $genre, $id]);
 
     header("Location: index.php");
