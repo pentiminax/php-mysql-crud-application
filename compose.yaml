@@ -1,0 +1,35 @@
+services:
+  php:
+    build: .
+    container_name: website
+    ports:
+      - "8080:80"
+    volumes:
+      - ./website:/var/www/html
+      - ./docker/php.dev.ini:/usr/local/etc/php/php.ini
+    depends_on:
+      - mysql
+    networks:
+      - web
+
+  mysql:
+    image: mysql:9.0
+    container_name: database
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: library
+      MYSQL_USER: user
+      MYSQL_PASSWORD: user
+    volumes:
+      - database_data:/var/lib/mysql
+      - ./docker/database/init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - web
+
+volumes:
+  database_data:
+
+networks:
+  web:
