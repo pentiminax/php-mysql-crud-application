@@ -1,1 +1,1 @@
-# php-mysql-crud-application
+# CRUD avec PHP et MySQL
